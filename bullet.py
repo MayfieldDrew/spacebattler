@@ -7,7 +7,7 @@ class Bullet():
         self.height = height
         self.x      = x
         self.y      = y
-        self.speed  = 35
+        self.speed  = 40
         self.nspeed = -13
         self.color  = color
         self.alive  = True
