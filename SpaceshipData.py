@@ -29,7 +29,7 @@ class SpaceshipData:
         self.score_color = (255, 255, 255)
         self.score_x = 20
         self.score_y = 30
-        self.R = 1 or 2 or 3 or 4
+        self.R = False
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
