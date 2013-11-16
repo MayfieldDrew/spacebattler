@@ -66,7 +66,7 @@ class SpaceshipData:
             self.addBaddie()
         elif random.randint(1, self.frame_rate) == 1:
             self.addStrongBaddie()
-        elif random.randint(1, self.frame_rate/3) ==1:
+        elif random.randint(1, self.frame_rate/5) ==1:
             self.addStrongerBaddie()
 
 
@@ -87,6 +87,19 @@ class SpaceshipData:
                     baddie.decreasehitpoints(1)
                     self.kill += 1
                     bullet.hit = False
+
+
+        for baddie in self.baddies:
+            if not baddie.alive:
+                continue
+            if not self.spaceship.Living:
+                continue
+            x,y,w,h = baddie.getDimensions()
+            self.spaceship.checkHitBaddie(x,y,w,h)
+            if self.spaceship.hit == True:
+                self.spaceship.setAlive(False)
+                baddie.setAlive(False)
+                
 
 
         live_bullets = []
@@ -110,53 +123,19 @@ class SpaceshipData:
         new_baddie.getAlive()
         new_baddie.setHitPoints(1)
         self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width, self.baddie_height, 0, random.randint(0,(self.height-self.baddie_height)), self.baddie_color )
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width, self.baddie_height, random.randint(0,(self.width-self.baddie_width)), 0, self.baddie_color )
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width, self.baddie_height, random.randint(0,(self.width-self.baddie_width)), self.height, self.baddie_color )
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
         return
     def addStrongBaddie(self):
         new_baddie = Baddie( self.baddie_width + 5, self.baddie_height + 5, self.width, random.randint(0,(self.height-self.baddie_height)), (255,255,0) )
         new_baddie.getAlive()
         new_baddie.setHitPoints(1)
         self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width + 5, self.baddie_height + 5, 0, random.randint(0,(self.height-self.baddie_height)), (255,255,0) )
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width + 5, self.baddie_height + 5, random.randint(0,(self.width-self.baddie_width)), 0, (255,255,0) ) 
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width + 5, self.baddie_height + 5, random.randint(0,(self.width-self.baddie_width)), self.height, (255,255,0))
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
+        return
     def addStrongerBaddie(self):
         new_baddie = Baddie( self.baddie_width + 10, self.baddie_height + 10, self.width, random.randint(0,(self.height-self.baddie_height)), (220,20,60) )
         new_baddie.getAlive()
         new_baddie.setHitPoints(1)
         self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width + 10, self.baddie_height + 10, 0, random.randint(0,(self.height-self.baddie_height)), (220,20,60) )
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width + 10, self.baddie_height + 10, random.randint(0,(self.width-self.baddie_width)), 0, (220,20,60) ) 
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
-        new_baddie = Baddie( self.baddie_width + 10, self.baddie_height + 10, random.randint(0,(self.width-self.baddie_width)), self.height, (220,20,60))
-        new_baddie.getAlive()
-        new_baddie.setHitPoints(1)
-        self.baddies.append( new_baddie )
+        return
 
     def draw(self,surface):
         rect = pygame.Rect(0,0,self.width,self.height)
